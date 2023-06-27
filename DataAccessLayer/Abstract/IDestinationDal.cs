@@ -15,7 +15,8 @@ namespace DataAccessLayer.Abstract
         //List<Destination> GetList();
 
         //Bu şekilde ayrı ayrı bu işlemleri yapmak yerine tek bir yapı oluşturup o yapı üzerinden crud işlemlerini gerçekleştirebiliriz bu yapımız IGenericDal ve paremetre olarak Destination gönderiyoruz miras aldırırız.
-
+        //public Destination GetDestinationWithGuide(int id);
+        public List<Destination> GetLast4Destinations();
 
     }
 }

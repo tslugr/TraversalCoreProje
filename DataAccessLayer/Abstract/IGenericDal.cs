@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +13,10 @@ namespace DataAccessLayer.Abstract
         void Delete(T t);
         void Update(T t);
         List<T> GetList();
+        T GetByID(int id);
+
+        //arama işlemi gibi kullanılacak metot
+        List<T> GetListByFilter(Expression<Func<T, bool>> filter);
 
         //gelen entityler t parametresi ile karşılayıp ilgili crud işlemini yapar
     }
