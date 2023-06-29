@@ -13,7 +13,10 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfDestinationDal : GenericRepository<Destination>, IDestinationDal
     {
-    
+        public Destination GetDestinationWithGuide(int id)
+        {
+            throw new NotImplementedException();
+        }
 
         public List<Destination> GetLast4Destinations()
         {

@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Abstract;
+using DataAccessLayer.Abstract;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using System;
@@ -11,41 +12,46 @@ namespace BusinessLayer.Concrete
 {
     public class CommentManager:ICommentService
     {
-        EfCommentDal _efCommentDal;
+        ICommentDal _commentDal;
 
-        public CommentManager(EfCommentDal efCommentDal)
+        public CommentManager(ICommentDal commentDal)
         {
-            _efCommentDal = efCommentDal;
+            _commentDal = commentDal;
         }
 
         public void TAdd(Comment t)
         {
-            _efCommentDal.Insert(t);
+            _commentDal.Insert(t);
         }
 
         public void TDelete(Comment t)
         {
-            _efCommentDal.Delete(t);
+            _commentDal.Delete(t);
         }
 
         public Comment TGetByID(int id)
         {
-            return _efCommentDal.GetByID(id);
+            return _commentDal.GetByID(id);
         }
 
         public List<Comment> TGetList()
         {
-           return _efCommentDal.GetList();
+           return _commentDal.GetList();
         }
 
         public List<Comment> TGetDestinationById(int id) 
         {
-            return _efCommentDal.GetListByFilter(x => x.DestinationID == id);
+            return _commentDal.GetListByFilter(x => x.DestinationID == id);
         }
 
         public void TUpdate(Comment t)
         {
-            _efCommentDal.Update(t);
+            _commentDal.Update(t);
+        }
+
+        public List<Comment> TGetListCommentWithDestination()
+        {
+            return _commentDal.GetListCommentWithDestination();
         }
     }
 }

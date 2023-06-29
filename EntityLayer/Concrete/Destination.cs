@@ -25,6 +25,8 @@ namespace EntityLayer.Concrete
 
         //Bir blokta birden fazla yorum olabilir
         public List<Comment> Comments { get; set; }
+        public List<Reservation> Reservations { get; set; }
+  
 
     }
 }
