@@ -1,10 +1,15 @@
 using BusinessLayer.Abstract;
 using BusinessLayer.Concrete;
 using BusinessLayer.Container;
+using BusinessLayer.ValidationRules;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using DTOLayer.DTOs.AnnouncementDTOs;
 using EntityLayer.Concrete;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,6 +25,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using TraversalCoreProje.Areas.Admin.Controllers;
+using TraversalCoreProje.CQRS.Handlers.DestinationHandlers;
 using TraversalCoreProje.Models;
 
 
@@ -37,6 +44,17 @@ namespace TraversalCoreProje
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //CQRS Çalýþmasý için eklenen kodlar
+            services.AddScoped<GetAllDestinationQueryHandler>();
+            services.AddScoped<GetDestinationByIDQueryHandler>();
+            services.AddScoped<CreateDestinationCommandHandler>();
+            services.AddScoped<RemoveDestinationCommandHandler>();
+            services.AddScoped<UpdateDestinationCommandHandler>();
+
+            services.AddMediatR(typeof(Startup));
+            //kod sonu
+
+
             //Loglama iþlemi için eklenen kodlar
             services.AddLogging(x =>
             {
@@ -51,6 +69,18 @@ namespace TraversalCoreProje
             services.AddDbContext<Context>();
             services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddErrorDescriber<CustomIdentityValidator>().AddEntityFrameworkStores<Context>();
             //kod sonu
+            //Automapper icin eklenen kod
+            services.AddAutoMapper(typeof(Startup));
+            services.AddTransient<IValidator<AnnouncementAddDto>,AnnouncementValidator>();
+            services.CustomerValidator();
+            //services.AddControllersWithViews().AddFluentValidation();
+            //kod sonu
+            //TraversalApiProject Eriþim kodu
+
+            services.AddHttpClient();
+
+            //kod sonu
+
             //manager tekrar newlemek yerine yapýlan configürasyon kod
 
             services.ContainerDependencies();
@@ -121,6 +151,7 @@ namespace TraversalCoreProje
                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                 );
             });
+            //kod sonu
         }
     }
 }

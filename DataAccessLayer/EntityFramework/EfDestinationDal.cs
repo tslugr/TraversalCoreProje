@@ -15,7 +15,10 @@ namespace DataAccessLayer.EntityFramework
     {
         public Destination GetDestinationWithGuide(int id)
         {
-            throw new NotImplementedException();
+            using (var c = new Context())
+            {
+                return c.Destinations.Where(x => x.DestinationID == id).Include(x => x.Guide).FirstOrDefault();
+            }
         }
 
         public List<Destination> GetLast4Destinations()

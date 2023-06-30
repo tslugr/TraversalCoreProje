@@ -54,3 +54,5 @@ namespace BusinessLayer.Concrete
         }
     }
 }
+
+//82 derste kaldım
