@@ -11,7 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAcce
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{120AE900-E277-42B2-A9CF-B27B82E179D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTOLayer", "DTOLayer\DTOLayer.csproj", "{9F12B31B-D280-40A8-B6E8-E4CC78238AD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTOLayer", "DTOLayer\DTOLayer.csproj", "{9F12B31B-D280-40A8-B6E8-E4CC78238AD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignaIRApi", "SignaIRApi\SignaIRApi.csproj", "{FD4E15E5-EE42-442A-9850-F9AEF481F0AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRConsume", "SignalRConsume\SignalRConsume.csproj", "{144F9AC5-E5ED-4CCA-A0F7-C646468C8740}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRApiForSql", "SignalRApiForSql\SignalRApiForSql.csproj", "{91BAA211-387C-4B3D-A63E-8D14654AE720}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +45,18 @@ Global
 		{9F12B31B-D280-40A8-B6E8-E4CC78238AD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F12B31B-D280-40A8-B6E8-E4CC78238AD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F12B31B-D280-40A8-B6E8-E4CC78238AD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD4E15E5-EE42-442A-9850-F9AEF481F0AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD4E15E5-EE42-442A-9850-F9AEF481F0AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD4E15E5-EE42-442A-9850-F9AEF481F0AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD4E15E5-EE42-442A-9850-F9AEF481F0AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{144F9AC5-E5ED-4CCA-A0F7-C646468C8740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{144F9AC5-E5ED-4CCA-A0F7-C646468C8740}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{144F9AC5-E5ED-4CCA-A0F7-C646468C8740}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{144F9AC5-E5ED-4CCA-A0F7-C646468C8740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91BAA211-387C-4B3D-A63E-8D14654AE720}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91BAA211-387C-4B3D-A63E-8D14654AE720}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91BAA211-387C-4B3D-A63E-8D14654AE720}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91BAA211-387C-4B3D-A63E-8D14654AE720}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

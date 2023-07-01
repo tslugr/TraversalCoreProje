@@ -14,7 +14,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -67,9 +69,13 @@ namespace TraversalCoreProje
 
             //ýdentity icin eklenen kodlar
             services.AddDbContext<Context>();
-            services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddErrorDescriber<CustomIdentityValidator>().AddEntityFrameworkStores<Context>();
+            services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddErrorDescriber<CustomIdentityValidator>().AddTokenProvider<DataProtectorTokenProvider<AppUser>>(TokenOptions.DefaultProvider).AddEntityFrameworkStores<Context>();
             //kod sonu
             //Automapper icin eklenen kod
+
+            services.AddHttpClient();
+
+            services.ContainerDependencies();
             services.AddAutoMapper(typeof(Startup));
             services.AddTransient<IValidator<AnnouncementAddDto>,AnnouncementValidator>();
             services.CustomerValidator();
@@ -95,7 +101,20 @@ namespace TraversalCoreProje
                     .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
-
+            services.AddLocalization(opt =>
+            {
+                //Çoklu dil desteði konum klasörü
+                opt.ResourcesPath = "Resources";
+            });
+            //Çoklu dil desteði icin yazýlan kod
+            services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix).AddDataAnnotationsLocalization();
+            //kod sonu
+            //Login sayfasýna yönlendirme kodu
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Login/SignIn/";
+            });
+            //kod sonu
             services.AddMvc();
 
         }
@@ -129,6 +148,11 @@ namespace TraversalCoreProje
 
             //ýdentity icin eklenen kodlar
             app.UseAuthorization();
+            //kod sonu
+            //çoklu dil desteði
+            var suppertedCultures = new[] { "en", "fr", "es", "gr", "tr", "de" };
+            var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(suppertedCultures[1]).AddSupportedCultures(suppertedCultures).AddSupportedUICultures(suppertedCultures);
+            app.UseRequestLocalization(localizationOptions);
             //kod sonu
             app.UseEndpoints(endpoints =>
             {
